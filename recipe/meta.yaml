@@ -1,6 +1,6 @@
-{% set version = "0.19.2" %}
+{% set version = "0.20.1" %}
 {% set number = "2" %}
-{% set sha256 = "2c91051023bf306b9ee653c6f842b0959b96de7d793e9aede82d0fb5f4f034f5" %}
+{% set sha256 = "990b15705d401ee159b63c96fe7b82c1f3b730c2f5f7ce49ecfcced9f216c634" %}
 
 package:
   name: biotite
@@ -12,8 +12,8 @@ source:
 
 build:
   number: {{ number }}
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv"
-  skip: True  # [py < 36]
+  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  skip: true  # [py < 36]
 
 requirements:
   build:
@@ -45,7 +45,7 @@ about:
   license: BSD 3-Clause
   license_family: BSD
   license_file: LICENSE.rst
-  summary: "A comprehensive library for computational molecular biology"
+  summary: A comprehensive library for computational molecular biology
   doc_url: https://www.biotite-python.org/
   dev_url: https://github.com/biotite-dev/biotite
 
