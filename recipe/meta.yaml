@@ -1,6 +1,6 @@
-{% set version = "0.22.0" %}
+{% set version = "0.23.0" %}
 {% set number = "0" %}
-{% set sha256 = "5aa2de319ee803d9427344ecaabce928d8082ba54500e9603e50574dc2f54de2" %}
+{% set sha256 = "987ff5e386db5840a648111818d7d3f1559eb52c9e2dc60bf076e8b840fa2b73" %}
 
 package:
   name: biotite
