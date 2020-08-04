@@ -42,7 +42,7 @@ test:
 
 about:
   home: https://www.biotite-python.org/
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.rst
   summary: A comprehensive library for computational molecular biology
