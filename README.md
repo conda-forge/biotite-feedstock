@@ -5,11 +5,13 @@ Home: https://www.biotite-python.org/
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/biotite-feedstock/blob/master/LICENSE.txt)
 
 Summary: A comprehensive library for computational molecular biology
 
+Development: https://github.com/biotite-dev/biotite
 
+Documentation: https://www.biotite-python.org/
 
 Current build status
 ====================
