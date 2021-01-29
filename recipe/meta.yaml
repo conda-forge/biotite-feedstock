@@ -13,7 +13,7 @@ source:
 build:
   number: {{ number }}
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
-  skip: true  # [py < 36]
+  skip: true  # [py < 37]
 
 requirements:
   build:
@@ -24,8 +24,8 @@ requirements:
     - setuptools >=30.0
     - wheel >=0.30
     - cython >=0.28
-    - numpy =1.13  # [py < 37]
-    - numpy =1.14  # [py >= 37]
+    - numpy =1.14  # [py < 39]
+    - numpy =1.19  # [py >= 39]
   run:
     - python
     - requests >=2.12
