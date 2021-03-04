@@ -31,6 +31,7 @@ requirements:
     - requests >=2.12
     - {{ pin_compatible('numpy') }}
     - msgpack-python
+    - networkx >=2.0
 
 test:
   source_files:
