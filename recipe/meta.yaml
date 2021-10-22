@@ -1,6 +1,6 @@
-{% set version = "0.25.0" %}
-{% set number = "1" %}
-{% set sha256 = "645375cd2a22cd714249ae953760f9d75af572981f97ea4af2f2e7941db7b7d6" %}
+{% set version = "0.30.0" %}
+{% set number = "0" %}
+{% set sha256 = "f9297af6ecd850485aab8d1608f12a4cb614cf88f7c9aac034c08129ae236e64" %}
 
 package:
   name: biotite
@@ -13,7 +13,7 @@ source:
 build:
   number: {{ number }}
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
-  skip: true  # [py < 36]
+  skip: true  # [py < 37]
 
 requirements:
   build:
@@ -24,13 +24,14 @@ requirements:
     - setuptools >=30.0
     - wheel >=0.30
     - cython >=0.28
-    - numpy =1.13  # [py < 37]
-    - numpy =1.14  # [py >= 37]
+    - numpy =1.14  # [py < 39]
+    - numpy =1.19  # [py >= 39]
   run:
     - python
     - requests >=2.12
     - {{ pin_compatible('numpy') }}
     - msgpack-python
+    - networkx >=2.0
 
 test:
   source_files:
