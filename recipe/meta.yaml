@@ -12,7 +12,7 @@ source:
 
 build:
   number: {{ number }}
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  script: {{ PYTHON }} -m pip install . --no-use-pep517 --no-deps --ignore-installed -vv
   skip: true  # [py < 37]
 
 requirements:
