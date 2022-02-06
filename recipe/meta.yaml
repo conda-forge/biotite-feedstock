@@ -1,5 +1,5 @@
 {% set version = "0.32.0" %}
-{% set number = "0" %}
+{% set number = "1" %}
 {% set sha256 = "8db724b23751326593183ab4b2fde025c4915000b4c70847f8437dc3e7bb8d39" %}
 
 package:
@@ -12,7 +12,7 @@ source:
 
 build:
   number: {{ number }}
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  script: {{ PYTHON }} -m pip install . --no-use-pep517 --no-deps --ignore-installed -vv
   skip: true  # [py < 38]
 
 requirements:
