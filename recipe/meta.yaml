@@ -28,9 +28,7 @@ requirements:
     - setuptools >=30.0
     - wheel >=0.30
     - cython >=0.28
-    - numpy =1.14  # [py==38]
-    - numpy =1.19  # [py==39]
-    - numpy =1.21  # [py==310]
+    - numpy
   run:
     - python
     - requests >=2.12
