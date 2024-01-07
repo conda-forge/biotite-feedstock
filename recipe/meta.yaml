@@ -13,7 +13,7 @@ source:
 build:
   number: {{ number }}
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
-  skip: true  # [py < 39]
+  skip: true  # [py < 310]
 
 requirements:
   build:
@@ -22,6 +22,7 @@ requirements:
     - cython                                 # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
     - python
     - pip
