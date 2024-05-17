@@ -22,6 +22,7 @@ requirements:
     - cython                                 # [build_platform != target_platform]
     - numpy <2.0                             # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - python
@@ -33,7 +34,6 @@ requirements:
   run:
     - python
     - requests >=2.12
-    - {{ pin_compatible('numpy') }}
     - msgpack-python
     - networkx >=2.0
 
