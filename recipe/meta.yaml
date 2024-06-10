@@ -1,6 +1,6 @@
-{% set version = "0.40.0" %}
+{% set version = "0.41.0" %}
 {% set number = "0" %}
-{% set sha256 = "513179e7549f1e83aabf3753bc51378e9a6ad0679762154b6673634f66b789f9" %}
+{% set sha256 = "e08bdc6436428a05f96226d23b61efc5e056fbd98f181765ce53e33bc9361f53" %}
 
 package:
   name: biotite
@@ -22,6 +22,7 @@ requirements:
     - cython                                 # [build_platform != target_platform]
     - numpy <2.0                             # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - python
