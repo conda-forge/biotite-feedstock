@@ -27,7 +27,9 @@ requirements:
   host:
     - python
     - pip
-    - setuptools >=30.0
+    - hatchling
+    - hatch-vcs =0.4
+    - hatch-cython =0.5
     - wheel >=0.30
     - cython >=3.0
     - numpy <2.0
