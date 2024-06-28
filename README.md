@@ -244,4 +244,5 @@ Feedstock Maintainers
 =====================
 
 * [@padix-key](https://github.com/padix-key/)
+* [@t0mdavid-m](https://github.com/t0mdavid-m/)
 
