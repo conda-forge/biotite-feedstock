@@ -1,5 +1,5 @@
 {% set version = "0.41.0" %}
-{% set number = "0" %}
+{% set number = "1" %}
 {% set sha256 = "e08bdc6436428a05f96226d23b61efc5e056fbd98f181765ce53e33bc9361f53" %}
 
 package:
@@ -12,7 +12,9 @@ source:
 
 build:
   number: {{ number }}
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  script:
+    - {{ PYTHON }} -m pip install hatch-cython =0.5 # TODO: Remove when hatch-cython is on Conda
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py < 310]
 
 requirements:
@@ -20,21 +22,23 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
-    - numpy <2.0                             # [build_platform != target_platform]
+    - numpy >=2.0                            # [build_platform != target_platform]
     - {{ compiler('c') }}
-    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
   host:
     - python
     - pip
-    - setuptools >=30.0
+    - hatchling
+    - hatch-vcs =0.4
+    # - hatch-cython =0.5  # not on Conda yet (https://github.com/joshua-auchincloss/hatch-cython/issues/57), installed in build script
     - wheel >=0.30
     - cython >=3.0
-    - numpy <2.0
+    - numpy >=2.0
   run:
     - python
     - requests >=2.12
-    - {{ pin_compatible('numpy') }}
+    - numpy >=1.26
     - msgpack-python
     - networkx >=2.0
 
