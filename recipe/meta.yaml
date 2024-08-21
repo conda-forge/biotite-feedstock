@@ -1,5 +1,4 @@
 {% set version = "0.41.0" %}
-{% set number = "1" %}
 {% set sha256 = "e08bdc6436428a05f96226d23b61efc5e056fbd98f181765ce53e33bc9361f53" %}
 
 package:
@@ -11,10 +10,10 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: {{ number }}
+  number: 0
   script:
     - {{ PYTHON }} -m pip install git+https://github.com/joshua-auchincloss/hatch-cython.git@v0.5.1  # TODO: Remove when hatch-cython is on Conda
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }} {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py < 310]
 
 requirements:
