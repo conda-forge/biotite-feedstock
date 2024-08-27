@@ -29,7 +29,9 @@ requirements:
   host:
     - python
     - pip
-    - hatchling
+    # Use hatch instead of hatchling, due to some peculiar error in hatch-vcs:
+    # ModuleNotFoundError: Error getting the version from source `vcs`: No module named 'hatch'
+    - hatch
     - hatch-vcs =0.4
     # - hatch-cython =0.5  # not on Conda yet (https://github.com/joshua-auchincloss/hatch-cython/issues/57), installed in build script
     - wheel >=0.30
