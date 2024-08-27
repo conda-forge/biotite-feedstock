@@ -1,5 +1,5 @@
-{% set version = "0.41.0" %}
-{% set sha256 = "e08bdc6436428a05f96226d23b61efc5e056fbd98f181765ce53e33bc9361f53" %}
+{% set version = "1.0.0" %}
+{% set sha256 = "7f5baa1535ec80430a4309a256f518cfa2036234024f1e678a58300841cfe0fe" %}
 
 package:
   name: biotite
@@ -11,9 +11,11 @@ source:
 
 build:
   number: 0
+  script_env:
+   - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script:
     - {{ PYTHON }} -m pip install git+https://github.com/joshua-auchincloss/hatch-cython.git@v0.5.1  # TODO: Remove when hatch-cython is on Conda
-    - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }} {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py < 310]
 
 requirements:
