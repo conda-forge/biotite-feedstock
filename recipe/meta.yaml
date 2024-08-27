@@ -39,6 +39,7 @@ requirements:
     - numpy >=2.0
   run:
     - python
+    - biotraj >=1.0,<2.0
     - requests >=2.12
     - numpy >=1.26
     - msgpack-python
