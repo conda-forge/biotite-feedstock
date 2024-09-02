@@ -1,4 +1,4 @@
-{% set version = "1.0.0" %}
+{% set version = "1.0.1" %}
 
 package:
   name: biotite
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/biotite-dev/biotite/archive/v{{ version }}.tar.gz
-  sha256: 7f5baa1535ec80430a4309a256f518cfa2036234024f1e678a58300841cfe0fe
+  sha256: 6af31d2f7978b59e1a155050270d8a094eb3c0de32ab6ab0c8406d7ef5592fd7
 
 build:
   number: 0
