@@ -5,8 +5,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/biotite-dev/biotite/archive/v{{ version }}.tar.gz
-  sha256: e6847abaa94a61d682f08af6f4ab4108d75a7cf5d2f2b7fd27549ce6a4896588
+  - url: https://github.com/biotite-dev/biotite/archive/v{{ version }}.tar.gz
+    sha256: e6847abaa94a61d682f08af6f4ab4108d75a7cf5d2f2b7fd27549ce6a4896588
+  - url: https://github.com/biotite-dev/biotite/releases/download/v{{ version }}/components.bcif
+    sha256: c306a5a8920905c4434fbc17cb359b9fcf6e4acba6fb8021f3b226b5fa433151
+    folder: src/biotite/structure/info/
 
 build:
   number: 0
