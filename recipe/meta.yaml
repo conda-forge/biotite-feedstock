@@ -1,4 +1,4 @@
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 package:
   name: biotite
@@ -6,13 +6,13 @@ package:
 
 source:
   - url: https://github.com/biotite-dev/biotite/archive/v{{ version }}.tar.gz
-    sha256: e6847abaa94a61d682f08af6f4ab4108d75a7cf5d2f2b7fd27549ce6a4896588
+    sha256: b2e39d130f035f3ad298021c7d35d45d15f876948f4c9af73e5d8576baaac009
   - url: https://github.com/biotite-dev/biotite/releases/download/v{{ version }}/components.bcif
-    sha256: c306a5a8920905c4434fbc17cb359b9fcf6e4acba6fb8021f3b226b5fa433151
+    sha256: 0a52aae6f6298b378007b2526b3f999d9feb6f2ee65559f7312e5bbfc9aea2a5
     folder: src/biotite/structure/info/
 
 build:
-  number: 1
+  number: 0
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script:
@@ -54,7 +54,7 @@ test:
   requires:
     - pytest
   commands:
-    - pytest --ignore=tests//application --ignore=tests//database --ignore=tests//test_doctest.py tests
+    - pytest tests//structure tests//sequence
 
 about:
   home: https://www.biotite-python.org/
