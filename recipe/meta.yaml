@@ -54,7 +54,7 @@ test:
   requires:
     - pytest
   commands:
-    - pytest --ignore=tests//application --ignore=tests//database --ignore=tests//test_doctest.py tests
+    - pytest tests//structure tests//sequence
 
 about:
   home: https://www.biotite-python.org/
