@@ -1,4 +1,4 @@
-{% set version = "1.2.0" %}
+{% set version = "1.3.0" %}
 
 package:
   name: biotite
@@ -6,9 +6,9 @@ package:
 
 source:
   - url: https://github.com/biotite-dev/biotite/archive/v{{ version }}.tar.gz
-    sha256: b2e39d130f035f3ad298021c7d35d45d15f876948f4c9af73e5d8576baaac009
+    sha256: 171e4b3f6c043a8d60eacc34834fef6282c5fbdd07a51470fcd03a48a431945f
   - url: https://github.com/biotite-dev/biotite/releases/download/v{{ version }}/components.bcif
-    sha256: 0a52aae6f6298b378007b2526b3f999d9feb6f2ee65559f7312e5bbfc9aea2a5
+    sha256: 52e2be2b018f11e79861729b099adebc08be6eab57912302cc33615ba24c6903
     folder: src/biotite/structure/info/
 
 build:
