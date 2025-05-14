@@ -18,7 +18,7 @@ build:
   script:
     - {{ PYTHON }} -m pip install git+https://github.com/joshua-auchincloss/hatch-cython.git@v0.5.1  # TODO: Remove when hatch-cython is on Conda
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py < 310]
+  skip: true  # [py < 311]
 
 requirements:
   build:
