@@ -12,7 +12,7 @@ source:
     folder: src/biotite/structure/info/
 
 build:
-  number: 0
+  number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script:
