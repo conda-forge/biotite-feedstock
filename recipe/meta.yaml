@@ -1,4 +1,4 @@
-{% set version = "1.4.0" %}
+{% set version = "1.5.0" %}
 
 package:
   name: biotite
@@ -6,13 +6,13 @@ package:
 
 source:
   - url: https://github.com/biotite-dev/biotite/archive/v{{ version }}.tar.gz
-    sha256: 8decf0ccd2cca2fb27d55db0e97808d341b064f75f25c2e8109e8b5b5692d8c8
+    sha256: ecd75fb642a3a4062f2cd91dbe28ba17678340b5ae9607b0b63516686a71bf05
   - url: https://github.com/biotite-dev/biotite/releases/download/v{{ version }}/components.bcif
-    sha256: cbdcacaae747a3c0509ada88e4910c9c415742d1b5cadd57f5606dcb0f320f66
+    sha256: f1939b65ea21bd5234ed2c2b7e1e09bb8fbd099afe567ca1e310544d60a7835c
     folder: src/biotite/structure/info/
 
 build:
-  number: 1
+  number: 0
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script:
