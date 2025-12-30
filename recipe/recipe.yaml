@@ -21,7 +21,6 @@ build:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
     content:
-      - ${{ PYTHON }} -m pip install git+https://github.com/joshua-auchincloss/hatch-cython.git@v0.5.1
       - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -40,13 +39,9 @@ requirements:
   host:
     - python
     - pip
-    # Use hatch instead of hatchling, due to some peculiar error in hatch-vcs:
-    # ModuleNotFoundError: Error getting the version from source `vcs`: No module named 'hatch'
-    - hatch
-    - hatch-vcs =0.4
-    # Make the linter happier
-    - setuptools
-    # - hatch-cython =0.5  # not on Conda yet (https://github.com/joshua-auchincloss/hatch-cython/issues/57), installed in build script
+    - hatchling
+    - hatch-vcs
+    - hatch-cython
     - wheel >=0.30
     - cython >=3.0
     - numpy >=2.0,<2.4
