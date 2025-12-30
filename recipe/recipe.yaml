@@ -1,0 +1,81 @@
+schema_version: 1
+
+context:
+  version: 1.5.0
+
+package:
+  name: biotite
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
+    sha256: ecd75fb642a3a4062f2cd91dbe28ba17678340b5ae9607b0b63516686a71bf05
+  - url: https://github.com/biotite-dev/biotite/releases/download/v${{ version }}/components.bcif
+    sha256: f1939b65ea21bd5234ed2c2b7e1e09bb8fbd099afe567ca1e310544d60a7835c
+    target_directory: src/biotite/structure/info/
+
+build:
+  number: 0
+  skip: match(python, "<3.11")
+  script:
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
+    content:
+      - ${{ PYTHON }} -m pip install git+https://github.com/joshua-auchincloss/hatch-cython.git@v0.5.1
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - if: build_platform != target_platform
+      then: cython
+    - if: build_platform != target_platform
+      then: numpy >=2.0
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+  host:
+    - python
+    - pip
+    # Use hatch instead of hatchling, due to some peculiar error in hatch-vcs:
+    # ModuleNotFoundError: Error getting the version from source `vcs`: No module named 'hatch'
+    - hatch
+    - hatch-vcs =0.4
+    # - hatch-cython =0.5  # not on Conda yet (https://github.com/joshua-auchincloss/hatch-cython/issues/57), installed in build script
+    - wheel >=0.30
+    - cython >=3.0
+    - numpy >=2.0
+  run:
+    - python
+    - biotraj >=1.0,<2.0
+    - requests >=2.12
+    - numpy >=1.26
+    - msgpack-python
+    - networkx >=2.0
+
+tests:
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - pytest
+    script:
+      - pytest tests//structure tests//sequence
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.rst
+  summary: A comprehensive library for computational molecular biology
+  homepage: https://www.biotite-python.org/
+  repository: https://github.com/biotite-dev/biotite
+  documentation: https://www.biotite-python.org/
+
+extra:
+  recipe-maintainers:
+    - t0mdavid-m
+    - padix-key
+
