@@ -49,12 +49,12 @@ requirements:
     # - hatch-cython =0.5  # not on Conda yet (https://github.com/joshua-auchincloss/hatch-cython/issues/57), installed in build script
     - wheel >=0.30
     - cython >=3.0
-    - numpy >=2.0
+    - numpy >=2.0,<2.4
   run:
     - python
     - biotraj >=1.0,<2.0
     - requests >=2.12
-    - numpy >=1.26
+    - numpy >=1.26,<2.4
     - msgpack-python
     - networkx >=2.0
 
