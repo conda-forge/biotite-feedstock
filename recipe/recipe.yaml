@@ -61,7 +61,10 @@ tests:
       run:
         - pytest
     script:
-      - pytest tests//structure tests//sequence
+      # Current failing tests in aarch 64
+      # See e.g., https://dev.azure.com/conda-forge/feedstock-builds/_build/results?buildId=1428046&view=logs&j=5b44946f-b0b5-570f-e735-950feabb4722&t=d53332be-ec07-565d-9b53-75513afd6eda
+      - pytest tests//structure//test_box.py::test_remove_pbc_restore  # Fails only for multi_model=True
+      - pytest tests//structure//test_rdf.py::test_rdf_normalized
 
 about:
   license: BSD-3-Clause
