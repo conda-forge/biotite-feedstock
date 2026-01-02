@@ -18,7 +18,8 @@ build:
   number: 1
   skip:
     - match(python, "<3.11")
-    - not linux-aarch64
+    - not linux
+    - not aarch64
   script:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
