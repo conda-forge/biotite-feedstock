@@ -17,7 +17,7 @@ source:
 build:
   number: 1
   skip:
-    - match(python, "<3.11")
+    - match(python, "<3.14")
     - not linux
     - not aarch64
   script:
