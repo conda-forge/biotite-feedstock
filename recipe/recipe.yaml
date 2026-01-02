@@ -15,7 +15,7 @@ source:
     target_directory: src/biotite/structure/info/
 
 build:
-  number: 0
+  number: 1
   skip:
     - match(python, "<3.11")
     - not linux-aarch64
