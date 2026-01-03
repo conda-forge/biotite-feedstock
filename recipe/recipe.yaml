@@ -1,0 +1,75 @@
+schema_version: 1
+
+context:
+  version: 1.5.0
+
+package:
+  name: biotite
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
+    sha256: ffa59572a1b7c84be39cfbf4f0126fa2a441dcd500fd879d0a9b81b4e77abd84
+  - url: https://github.com/biotite-dev/biotite/releases/download/v${{ version }}/components.bcif
+    sha256: 990acee8f10e90f370da2d431e9e6aba03720f1d20fb677fb95f93e0a0f56f02
+    target_directory: src/biotite/structure/info/
+
+build:
+  number: 0
+  skip: match(python, "<3.11")
+  script:
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
+    content:
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - cython
+        - numpy >=2.0,<2.4
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+  host:
+    - python
+    - pip
+    - hatchling
+    - hatch-vcs
+    - hatch-cython
+    - wheel >=0.30
+    - cython >=3.0
+    - numpy >=2.0,<2.4
+  run:
+    - python
+    - biotraj >=1.0,<2.0
+    - requests >=2.12
+    - numpy >=1.26,<2.4
+    - msgpack-python
+    - networkx >=2.0
+
+tests:
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - pytest
+    script:
+      - pytest tests//structure tests//sequence
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.rst
+  summary: A comprehensive library for computational molecular biology
+  homepage: https://www.biotite-python.org/
+  repository: https://github.com/biotite-dev/biotite
+  documentation: https://www.biotite-python.org/
+
+extra:
+  recipe-maintainers:
+    - t0mdavid-m
+    - padix-key
