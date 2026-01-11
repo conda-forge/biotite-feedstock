@@ -70,7 +70,7 @@ tests:
       #   https://github.com/conda-forge/biotite-feedstock/pull/81#issuecomment-3711328024
       # Deactivate tests failing for the time being
       - if: aarch64
-        then: pytest tests//structure tests//sequence --ignore=tests//structure//test_box.py::test_remove_pbc_restore --ignore=tests//structure//test_rdf.py::test_rdf_normalized
+        then: pytest tests//structure tests//sequence -k "not test_remove_pbc_restore and not test_rdf_normalized"
         else: pytest tests//structure tests//sequence
 
 about:
