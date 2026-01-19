@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 1.5.0
+  version: "1.6.0"
 
 package:
   name: biotite
@@ -9,13 +9,13 @@ package:
 
 source:
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
-    sha256: ffa59572a1b7c84be39cfbf4f0126fa2a441dcd500fd879d0a9b81b4e77abd84
+    sha256: 0c3b104cc815e0f35e8ceebca4ddd7f42f3cf2c466c50941d06ec09bb4b7a11d
   - url: https://github.com/biotite-dev/biotite/releases/download/v${{ version }}/components.bcif
-    sha256: 990acee8f10e90f370da2d431e9e6aba03720f1d20fb677fb95f93e0a0f56f02
+    sha256: 4976bfc1135906455cfe96469dbefcd41bb39d54dd263ec5acb328667fbdd1e0
     target_directory: src/biotite/structure/info/
 
 build:
-  number: 1
+  number: 0
   skip: match(python, "<3.11")
   script:
     env:
