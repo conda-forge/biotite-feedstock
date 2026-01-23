@@ -9,9 +9,9 @@ package:
 
 source:
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
-    sha256: 0c3b104cc815e0f35e8ceebca4ddd7f42f3cf2c466c50941d06ec09bb4b7a11d
+    sha256: 945d91d984a995a14e93cfb751521bedfc6e68d9b2ca3e86fd67b6ddd1553cee
   - url: https://github.com/biotite-dev/biotite/releases/download/v${{ version }}/components.bcif
-    sha256: 4976bfc1135906455cfe96469dbefcd41bb39d54dd263ec5acb328667fbdd1e0
+    sha256: dffdb3a19600d51854058daecfbc9bd1b94aab413a04e7afed8d4b7670621d47
     target_directory: src/biotite/structure/info/
 
 build:
