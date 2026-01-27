@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 1.5.0
+  version: 1.6.0
 
 package:
   name: biotite
@@ -9,14 +9,15 @@ package:
 
 source:
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
-    sha256: ffa59572a1b7c84be39cfbf4f0126fa2a441dcd500fd879d0a9b81b4e77abd84
+    sha256: 945d91d984a995a14e93cfb751521bedfc6e68d9b2ca3e86fd67b6ddd1553cee
   - url: https://github.com/biotite-dev/biotite/releases/download/v${{ version }}/components.bcif
-    sha256: 990acee8f10e90f370da2d431e9e6aba03720f1d20fb677fb95f93e0a0f56f02
+    sha256: dffdb3a19600d51854058daecfbc9bd1b94aab413a04e7afed8d4b7670621d47
     target_directory: src/biotite/structure/info/
 
 build:
-  number: 1
-  skip: match(python, "<3.11")
+  number: 0
+  skip:
+    - match(python, "<3.11")
   script:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
@@ -59,7 +60,16 @@ tests:
       run:
         - pytest
     script:
-      - pytest tests//structure tests//sequence
+      # Current failing tests in aarch64
+      # See e.g., https://dev.azure.com/conda-forge/feedstock-builds/_build/results?buildId=1428046&view=logs&j=5b44946f-b0b5-570f-e735-950feabb4722&t=d53332be-ec07-565d-9b53-75513afd6eda
+      # - pytest tests//structure//test_box.py::test_remove_pbc_restore  # Fails only for multi_model=True
+      # - pytest tests//structure//test_rdf.py::test_rdf_normalized
+      # But these work in native ARM, so we suspect this is a glitch of QEMU emulation
+      #   https://github.com/conda-forge/biotite-feedstock/pull/81#issuecomment-3711328024
+      # Deactivate tests failing for the time being
+      - if: aarch64
+        then: pytest tests//structure tests//sequence -k "not test_remove_pbc_restore and not test_rdf_normalized"
+        else: pytest tests//structure tests//sequence
 
 about:
   license: BSD-3-Clause
