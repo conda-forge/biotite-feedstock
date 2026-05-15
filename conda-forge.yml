@@ -1,6 +1,3 @@
-build_platform:
-  linux_aarch64: linux_64
-  osx_arm64: osx_64
 conda_build_tool: rattler-build
 conda_build:
   pkg_format: '2'
@@ -9,8 +6,5 @@ github:
   branch_name: main
   tooling_branch_name: main
 provider:
-  linux: azure
   linux_aarch64: default
-  osx: azure
-  win: azure
-test: native_and_emulated
+  osx_arm64: default
