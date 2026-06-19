@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 1.6.0
+  version: "1.7.0"
 
 package:
   name: biotite
@@ -9,15 +9,15 @@ package:
 
 source:
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
-    sha256: 945d91d984a995a14e93cfb751521bedfc6e68d9b2ca3e86fd67b6ddd1553cee
+    sha256: 6ff1b2550571798956e43ccbd9268f6985a251e9b8343d2e5c96791933f95d20
   - url: https://github.com/biotite-dev/biotite/releases/download/v${{ version }}/components.bcif
-    sha256: dffdb3a19600d51854058daecfbc9bd1b94aab413a04e7afed8d4b7670621d47
+    sha256: 69c097244159a124544e9291fba0f167de45ab6a89f4b2e3e5750ccf03dd445f
     target_directory: src/biotite/structure/info/
 
 build:
   skip:
     - match(python, "<3.11")
-  number: 1
+  number: 0
   script:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
@@ -53,8 +53,7 @@ tests:
     requirements:
       run:
         - pytest
-    script:
-      pytest tests//structure tests//sequence
+    script: pytest tests//structure tests//sequence
 
 about:
   license: BSD-3-Clause
