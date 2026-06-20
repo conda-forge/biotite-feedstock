@@ -9,7 +9,7 @@ package:
 
 source:
   # Build from the PyPI sdist to avoid `setuptools-scm` omitting all non-source files
-  - url: https://pypi.io/packages/source/b/biotite/biotite-${{ version }}.tar.gz
+  - url: https://pypi.org/packages/source/b/biotite/biotite-${{ version }}.tar.gz
     sha256: 815a6298251925a181de5cec6ad8ccbd3768e6a01243078995f33f195217416e
   # The sdist prunes the test suite, so fetch the repository archive for tests.
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
@@ -24,6 +24,8 @@ build:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
     content:
+      # Bundle the licenses of the vendored Rust dependencies
+      - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
       - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -32,6 +34,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ compiler('rust') }}
     - ${{ stdlib("c") }}
+    - cargo-bundle-licenses
   host:
     - python
     - pip
@@ -63,7 +66,9 @@ tests:
 
 about:
   license: BSD-3-Clause
-  license_file: LICENSE.rst
+  license_file:
+    - LICENSE.rst
+    - THIRDPARTY.yml
   summary: A comprehensive library for computational molecular biology
   homepage: https://www.biotite-python.org/
   repository: https://github.com/biotite-dev/biotite
