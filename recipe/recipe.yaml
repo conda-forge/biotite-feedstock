@@ -1,40 +1,49 @@
 schema_version: 1
 
 context:
-  version: 1.6.0
+  version: "1.7.0"
 
 package:
   name: biotite
   version: ${{ version }}
 
 source:
+  # Build from the PyPI sdist to avoid `setuptools-scm` omitting all non-source files
+  - url: https://pypi.org/packages/source/b/biotite/biotite-${{ version }}.tar.gz
+    sha256: 815a6298251925a181de5cec6ad8ccbd3768e6a01243078995f33f195217416e
+  # The sdist prunes the test suite, so fetch the repository archive for tests.
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
-    sha256: 945d91d984a995a14e93cfb751521bedfc6e68d9b2ca3e86fd67b6ddd1553cee
-  - url: https://github.com/biotite-dev/biotite/releases/download/v${{ version }}/components.bcif
-    sha256: dffdb3a19600d51854058daecfbc9bd1b94aab413a04e7afed8d4b7670621d47
-    target_directory: src/biotite/structure/info/
+    sha256: 6ff1b2550571798956e43ccbd9268f6985a251e9b8343d2e5c96791933f95d20
+    target_directory: biotite-repo
 
 build:
   skip:
-    - match(python, "<3.11")
-  number: 1
+    - match(python, "<3.12")
+  number: 0
   script:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
     content:
+      # Bundle the licenses of the vendored Rust dependencies
+      - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
       - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
+    - ${{ compiler('rust') }}
     - ${{ stdlib("c") }}
+    - cargo-bundle-licenses
   host:
     - python
     - pip
-    - hatchling
-    - hatch-vcs
-    - hatch-cython
+    - setuptools
+    - setuptools-scm
+    - setuptools-rust
+    # `setup.py` imports `puccinialin` unconditionally; with the Rust compiler
+    # providing `cargo` it is imported but never used to download a toolchain.
+    - puccinialin
     - wheel >=0.30
     - cython >=3.0
     - numpy >=2.0,<2.4
@@ -49,16 +58,17 @@ requirements:
 tests:
   - files:
       source:
-        - tests/
+        - biotite-repo/tests/
     requirements:
       run:
         - pytest
-    script:
-      pytest tests//structure tests//sequence
+    script: pytest biotite-repo/tests/structure biotite-repo/tests/sequence
 
 about:
   license: BSD-3-Clause
-  license_file: LICENSE.rst
+  license_file:
+    - LICENSE.rst
+    - THIRDPARTY.yml
   summary: A comprehensive library for computational molecular biology
   homepage: https://www.biotite-python.org/
   repository: https://github.com/biotite-dev/biotite
