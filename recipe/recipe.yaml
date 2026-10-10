@@ -54,8 +54,14 @@ requirements:
     - numpy >=1.26,<2.4
     - msgpack-python
     - networkx >=2.0
+    - packaging >=24
 
 tests:
+  - python:
+      imports:
+        - biotite
+        - biotite.interface.version
+      pip_check: true
   - files:
       source:
         - biotite-repo/tests/
