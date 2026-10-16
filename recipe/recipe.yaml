@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.7.1"
+  version: "1.8.0"
 
 package:
   name: biotite
@@ -10,16 +10,16 @@ package:
 source:
   # Build from the PyPI sdist to avoid `setuptools-scm` omitting all non-source files
   - url: https://pypi.org/packages/source/b/biotite/biotite-${{ version }}.tar.gz
-    sha256: 2ae4a5d2c2d5ba08ca5d89a647984c99f45994eb908b614e896ce9e4db3ca800
+    sha256: 7cef4a2a2acc142b9b3c10fe39070e6f4faa7bf65358ebf2bc05f1b0719a0c0b
   # The sdist prunes the test suite, so fetch the repository archive for tests.
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
-    sha256: 7d223146f32584e376cfc52634456b8325ec618dafaded4b3cb4cb72cad18bd4
+    sha256: dbd8cec76066dca8918efd8821f9b0247e27d9cda71abfeaa3cae97877a45457
     target_directory: biotite-repo
 
 build:
   skip:
     - match(python, "<3.12")
-  number: 1
+  number: 0
   script:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
