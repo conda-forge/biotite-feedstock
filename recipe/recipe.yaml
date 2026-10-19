@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.8.0"
+  version: "2.0.0"
 
 package:
   name: biotite
@@ -10,10 +10,10 @@ package:
 source:
   # Build from the PyPI sdist to avoid `setuptools-scm` omitting all non-source files
   - url: https://pypi.org/packages/source/b/biotite/biotite-${{ version }}.tar.gz
-    sha256: 7cef4a2a2acc142b9b3c10fe39070e6f4faa7bf65358ebf2bc05f1b0719a0c0b
+    sha256: 0adfb641b1b8879190c5f1e413ec2423cf6fcd7f0739ab62a8ddbca970aa753c
   # The sdist prunes the test suite, so fetch the repository archive for tests.
   - url: https://github.com/biotite-dev/biotite/archive/v${{ version }}.tar.gz
-    sha256: dbd8cec76066dca8918efd8821f9b0247e27d9cda71abfeaa3cae97877a45457
+    sha256: 95d16e3b9e9b52a17d8e73a8c7b14d848848ba17fc6a120d04cdc43a542e9c8a
     target_directory: biotite-repo
 
 build:
@@ -31,7 +31,6 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
-    - ${{ compiler('cxx') }}
     - ${{ compiler('rust') }}
     - ${{ stdlib("c") }}
     - cargo-bundle-licenses
@@ -41,18 +40,12 @@ requirements:
     - setuptools
     - setuptools-scm
     - setuptools-rust
-    # `setup.py` imports `puccinialin` unconditionally; with the Rust compiler
-    # providing `cargo` it is imported but never used to download a toolchain.
-    - puccinialin
-    - wheel >=0.30
-    - cython >=3.0
-    - numpy >=2.0,<2.4
   run:
     - python
     - biotraj >=1.0,<2.0
     - requests >=2.12
-    - numpy >=1.26,<2.4
-    - msgpack-python
+    - numpy >=2.1
+    - msgpack-python >=0.5.6
     - networkx >=2.0
     - packaging >=24
 
